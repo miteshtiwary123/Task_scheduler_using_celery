@@ -1,0 +1,95 @@
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Data</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding-top: 10px;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .data-container {
+            max-width: 90%;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #000000 !important; /* Dark border color */
+        }
+        .btn-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 text-md-right">
+                    <h1 class="h1">Subscription Program Page</h1>
+            </div>
+        </div>
+      </header>
+
+    <div class="container data-container">
+        <h2 class="mb-4">Subscription Data</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Yearly Cost</th>
+                    <th>Start Date</th>
+                    <th>Support End Date</th>
+                    <th>Expiration</th>
+                    <th>Remark</th>
+                    <th>Email Address</th>
+                    <th>Vendor Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.descriptions }}</td>
+                        <td>{{ item.yearly_cost }}</td>
+                        <td>{{ item.purchase_date|date:'d-m-Y' }}</td>
+                        <td>{{ item.support_end|date:'d-m-Y' }}</td>
+                        <td {% if item.renewal_date|days_until_renewal <= 30 %}class="text-danger"{% endif %}>{{ item.renewal_date|date:'d-m-Y' }}</td>
+                        <td>{{ item.remark|default:"" }}</td>
+                        <td>{{ item.email_address }}</td>
+                        <td>{{ item.vendor_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="btn-container">
+            <a href="{% url 'create_form' %}" class="btn btn-primary">Go Back to Create Form</a>
+        </div>
+    </div>
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2024 Your Company Name</p>
+      </footer>
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

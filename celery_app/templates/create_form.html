@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Form</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding-top: 10px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* 100% of the viewport height */
+        }
+        main {
+            flex: 1; /* This will push the footer to the bottom */
+        }
+        .form-container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <header class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 text-md-right">
+                    <h1 class="h1">Subscription Program Page</h1>
+                </div>
+                <div class="col-md-3 text-md-right pt-3">
+                    <a href="{% url 'display_data' %}" class="btn btn-secondary btn-sm">View Data</a>
+                </div>
+            </div>
+        </div>
+      </header>
+    <div class="container text-center form-container">
+        <h3 class="mb-4">Subscription Form</h3>
+        <form method="post" action="{% url 'create_form' %}">
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col-4 h5"><label for="id_description">Description:</label></div>
+                <div class="col-8">{{ form.descriptions }}</div>
+            </div><br />
+            <div class="row">
+                <div class="col-4 h5"><label for="id_yearly_cost">Yearly Cost:</label></div>
+                <div class="col-8">{{ form.yearly_cost }}</div>
+            </div><br />
+            <div class="row">
+                <div class="col-4 h5"><label for="id_purchase_date">Start Date:</label></div>
+                <div class="col-8"> {{ form.purchase_date }}</div>
+            </div><br />
+            <div class="row">
+                <div class="col-4 h5"> <label for="id_renewal_date">Support End Date:</label></div>
+                <div class="col-8"> {{ form.support_end }}</div>
+            </div><br />
+            <div class="row">
+                <div class="col-4 h5"> <label for="id_renewal_date">Expiration:</label></div>
+                <div class="col-8"> {{ form.renewal_date }}</div>
+            </div><br />
+            <div class="row">
+                <div class="col-4 h5"> <label for="id_remark">Remark:</label></div>
+                <div class="col-8"> {{ form.remark }}</div>
+            </div><br />
+            <div class="row">
+                <div class="col-4 h5"> <label for="id_email_address">Email Address:</label></div>
+                <div class="col-8">{{ form.email_address }}</div>
+            </div><br />
+            <div class="row">
+                <div class="col-4 h5"> <label for="id_vendor_name">Vendor Name:</label></div>
+                <div class="col-8">{{ form.vendor_name }}</div>
+            </div><br />
+            <div class="row">
+                <div class="col-8 text-right"> <button type="submit" class="btn btn-primary btn-lg">Submit</button></div>
+
+            </div>
+
+        </form>
+    </div>
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2024 Your Company Name</p>
+      </footer>
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        // Use jQuery instead of $
+        jQuery(document).ready(function($){
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',  // Set the desired date format
+                autoclose: true,
+                todayHighlight: true,
+            });
+        });
+    </script>
+</body>
+</html>
